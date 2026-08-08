@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
   const [copied, setCopied] = useState(false);
 
-  // Copy download URL to clipboard
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(downloadUrl);
@@ -14,7 +13,6 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
     }
   };
 
-  // Generic share using Web Share API
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -29,12 +27,10 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
         }
       }
     } else {
-      // Fallback – copy link
       await handleCopy();
     }
   };
 
-  // Direct platform links
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
     `Download this file: ${downloadUrl}`
   )}`;
@@ -64,7 +60,6 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
         <strong>File ID:</strong> <span className="font-mono text-sm">{fileId}</span>
       </p>
 
-      {/* Share Options */}
       <div className="flex flex-wrap justify-center gap-2 mt-4">
         <button
           onClick={handleCopy}
@@ -72,14 +67,12 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
         >
           {copied ? '✅ Copied!' : '📋 Copy Link'}
         </button>
-
         <button
           onClick={handleShare}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-1"
         >
           📤 Share
         </button>
-
         <a
           href={whatsappUrl}
           target="_blank"
@@ -88,7 +81,6 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
         >
           💬 WhatsApp
         </a>
-
         <a
           href={telegramUrl}
           target="_blank"
@@ -97,7 +89,6 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
         >
           ✈️ Telegram
         </a>
-
         <a
           href={emailUrl}
           className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-1"
@@ -105,7 +96,6 @@ const QRCodeCard = ({ qrCode, downloadUrl, fileId }) => {
           📧 Email
         </a>
       </div>
-
       <p className="text-sm text-gray-600 mt-4">
         Share the QR code image or use one of the buttons above to send the download link.
       </p>

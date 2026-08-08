@@ -63,7 +63,6 @@ const Home = () => {
     document.body.style.overflow = 'auto';
   };
 
-  // Helper to format date/time
   const formatDate = (dateString) => {
     if (!dateString) return 'Unknown';
     const date = new Date(dateString);
@@ -104,7 +103,6 @@ const Home = () => {
                   </span>
                 </div>
               </div>
-
               <div className="flex flex-wrap items-center gap-2">
                 <Link
                   to={`/file/${file.fileId}`}
@@ -124,7 +122,6 @@ const Home = () => {
         </div>
       )}
 
-      {/* QR Modal with Sharing Options */}
       {selectedFile && (
         <div
           className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4"
@@ -140,18 +137,15 @@ const Home = () => {
             >
               ×
             </button>
-
             <h3 className="text-xl font-semibold mb-1 text-center">{selectedFile.originalName}</h3>
             <p className="text-xs text-center text-gray-500 mb-3">
               🕒 Uploaded: {formatDate(selectedFile.createdAt)}
             </p>
-
             <img
               src={selectedFile.qrCode}
               alt="QR Code"
               className="mx-auto max-w-[200px] mb-4"
             />
-
             <p className="text-sm text-center text-gray-600 mb-1">
               <strong>Download URL:</strong>
             </p>
@@ -163,7 +157,6 @@ const Home = () => {
             >
               {selectedFile.downloadUrl}
             </a>
-
             <div className="grid grid-cols-2 gap-2 mt-2">
               <button
                 onClick={() => handleCopyLink(selectedFile.downloadUrl, selectedFile.fileId)}
@@ -171,7 +164,6 @@ const Home = () => {
               >
                 {copiedId === selectedFile.fileId ? '✅' : '📋'} Copy
               </button>
-
               <a
                 href={`https://wa.me/?text=${encodeURIComponent(`Download this file: ${selectedFile.downloadUrl}`)}`}
                 target="_blank"
@@ -180,7 +172,6 @@ const Home = () => {
               >
                 💬 WhatsApp
               </a>
-
               <a
                 href={`https://t.me/share/url?url=${encodeURIComponent(selectedFile.downloadUrl)}&text=${encodeURIComponent('Download this file:')}`}
                 target="_blank"
@@ -189,14 +180,12 @@ const Home = () => {
               >
                 ✈️ Telegram
               </a>
-
               <a
                 href={`mailto:?subject=Shared%20File&body=${encodeURIComponent(`Download this file: ${selectedFile.downloadUrl}`)}`}
                 className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg transition text-sm flex items-center justify-center"
               >
                 📧 Email
               </a>
-
               <button
                 onClick={() => handleShare(selectedFile.downloadUrl)}
                 className="col-span-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg transition text-sm flex items-center justify-center"

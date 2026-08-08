@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UploadForm from '../components/UploadForm';
 import QRCodeCard from '../components/QRCodeCard';
@@ -11,22 +11,22 @@ const UploadPage = () => {
   const navigate = useNavigate();
 
   const handleUpload = async (file) => {
-  setLoading(true);
-  setError('');
-  try {
-    const res = await uploadFile(file);
-    if (res.success) {
-      setUploadResult(res.data);
-    } else {
-      setError(res.message || 'Upload failed');
+    setLoading(true);
+    setError('');
+    try {
+      const res = await uploadFile(file);
+      if (res.success) {
+        setUploadResult(res.data);
+      } else {
+        setError(res.message || 'Upload failed');
+      }
+    } catch (err) {
+      console.error('Upload error:', err);
+      setError(err.response?.data?.message || err.message || 'Upload failed');
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error('Upload error:', err); // <-- LOG THE FULL ERROR
-    setError(err.response?.data?.message || err.message || 'Upload failed');
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
@@ -47,11 +47,11 @@ const UploadPage = () => {
             View File Details
           </button>
           <button
-        onClick={() => navigate('/')}
-        className="bg-gray-600 text-white mx-2 px-6 py-2 rounded-lg hover:bg-gray-700 transition"
-      >
-        Back
-      </button>
+            onClick={() => navigate('/')}
+            className="bg-gray-600 text-white mx-2 px-6 py-2 rounded-lg hover:bg-gray-700 transition"
+          >
+            Back
+          </button>
         </>
       )}
     </div>
