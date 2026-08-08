@@ -31,10 +31,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api/files', fileRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
-});
+// // Health check
+// app.get('/api/health', (req, res) => {
+//   res.status(200).json({ status: 'OK' });
+// });
 
 // Global error handler
 app.use((err, req, res, next) => {
